@@ -12,6 +12,7 @@
 <body>
   {% if request.user.is_authenticated %}
     <span>{{ request.user }}</span>
+    <a href="{% url 'accounts:logout' %}">로그아웃</a>
     <a href="{% url 'accounts:update' user.pk  %}">정보수정</a>
   {% else %}
     <a href="{% url 'accounts:signup' %}">회원가입</a>

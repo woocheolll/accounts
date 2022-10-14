@@ -4,7 +4,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from .models import User
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.decorators import login_required
 
 
 def signup(request):
@@ -62,3 +63,7 @@ def update(request,pk):
         'user': user
     }
     return render(request, 'accounts/update.html',context)
+
+def logout(request):
+    auth_logout(request)
+    return redirect('accounts:index')
