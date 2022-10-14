@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def signup(request):
+ def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
