@@ -1,1 +1,27 @@
-<h1>index</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% block body %}
+<h1>회원정보</h1>
+<td><a href="{% url 'accounts:signup'  %}">회원가입</a></td>
+<table class="table text-center align-middle">
+    <thead>
+        <th>ID</th>
+        <th>username</th>
+        <th>e-mail</th>
+        <th>생성 날짜</th>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{user.id}}</td>
+            <td><a href="">{{ user.username }}</a></td>
+            <td>{{user.email}}</td>
+            <td>{{user.date_joined}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<hr>
+{% endblock %}

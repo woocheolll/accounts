@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
+from .models import User
 
 
 
@@ -34,4 +35,7 @@ def login(request):
     return render(request, 'accounts/login.html', context)
 
 def index(request):
-    pass
+    users = User.objects.all()
+    # Template에 전달한다.
+    context = {"users": users}
+    return render(request, "accounts/index.html", context)
