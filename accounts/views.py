@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from .models import User
@@ -47,3 +47,18 @@ def detail(request, pk):
         'user': user
     }
     return render(request, 'accounts/detail.html', context)
+
+def update(request,pk):
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:detail',request.user.pk)
+    else:
+        user = get_user_model().objects.get(pk=pk)
+        form = CustomUserChangeForm(instance=request.user)
+    context = {
+        'form': form,
+        'user': user
+    }
+    return render(request, 'accounts/update.html',context)
